@@ -1,27 +1,37 @@
 import React, { Component } from 'react';
+import './ToDo.css';
 
 class ToDo extends Component {
+    constructor(props){
+        super(props);
+
+        this.completeClick = this.props.completeToDo.bind(this, this.props.id);
+        this.deleteClick = this.props.deleteToDo.bind(this, this.props.id);
+    }
     render() {
+        const buttonList = {
+            listStyle : 'none'
+        }
         const isComplete = this.props.isComplete;
         return (
-            <tr class='toDoItem'>
-                <td class={this.props.complete ? 'toDoCard' : 'doneCard'}>
-                    <h2 class='cardTitle'>
+            <tr className='toDoItem'>
+                <td className={this.props.isComplete ? 'doneCard' : 'toDoCard'}>
+                    <h2 className='cardTitle'>
                         {this.props.title}
                     </h2>
-                    <p class='description'>
+                    <p className='description'>
                         {this.props.description}
                     </p>
                 </td>
-                <td class='buttons'>
-                    <ul style='list-style:none'>
+                <td className='buttons'>
+                    <ul style={buttonList}>
                         {!isComplete &&
                             <li>
-                                <button type='button' onClick={this.props.completeToDo(this.props.title)}>Complete</button>
+                                <button type='button' onClick={this.completeClick}>Complete</button>
                             </li>
                         }
                         <li>
-                            <button type='button' onClick={this.props.deleteToDo(this.props.title)}>Delete</button>
+                            <button type='button' onClick={this.deleteClick}>Delete</button>
                         </li>
                     </ul>
                 </td>

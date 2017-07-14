@@ -1,0 +1,18 @@
+.toDoItem {
+    border: 1px solid #000000;
+    border-radius: 20px;
+    padding-bottom: 20px;
+}
+.toDoCard {
+    background-color: #DDDDDD;
+}
+.doneCard {
+    background-color: #DDFFDD;
+}
+.cardTitle {
+    text-align: left;
+}
+.description {
+    text-align: center;
+    vertical-align: text-top;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ToDo from './ToDo.js';
 import AddToDo from './AddToDo.js';
+import './List.css';
 
 class List extends Component {
     constructor() {
@@ -14,7 +15,6 @@ class List extends Component {
         this.deleteToDo = this.deleteToDo.bind(this);
     }
     pushToDo(toDo) {
-        console.log(`ping`)
         let toDoList = this.state.toDos;
         toDoList.push({
             title: toDo.title,
@@ -25,22 +25,18 @@ class List extends Component {
             toDos: toDoList
         });
     }
-    completeToDo(completedTitle) {
+    completeToDo(completedIndex) {
         let toDoList = this.state.toDos;
-        console.log(`state =${this.state.toDos} and toDoList =${toDoList}`);
-        // toDolist.forEach(toDo=>{
-        //     if(toDo.title===completedTitle)
-        //         toDo.isComplete = true;
-        // });
-        // this.setState({
-        //     toDos: toDoList
-        // });
+        toDoList[completedIndex].isComplete = true;
+        this.setState({
+            toDos: toDoList
+        });
     }
-    deleteToDo(deletedTitle) {
-        let toDoList = [];
-        this.state.toDos.forEach(toDo => {
-            if (toDo.title !== deletedTitle)
-                toDoList.push(toDo);
+    deleteToDo(deletedIndex) {
+        let toDoList = this.state.toDos;
+        toDoList.splice(deletedIndex, 1);
+        this.setState({
+            toDos: toDoList
         });
     }
     render() {
@@ -49,10 +45,12 @@ class List extends Component {
         return (
             <div>
                 {thereAreToDos &&
-                    <table>
-                        {toDos.map(toDo => (
-                            <ToDo title={toDo.title} description={toDo.description} isComplete={toDo.isComplete} completeToDo={this.completeToDo} deleteToDo={this.deleteToDo} />
+                    <table className='toDoList'>
+                        <tbody>
+                        {toDos.map((toDo, i) => (
+                            <ToDo key={i} id={i} title={toDo.title} description={toDo.description} isComplete={toDo.isComplete} completeToDo={this.completeToDo} deleteToDo={this.deleteToDo} />
                         ))}
+                        </tbody>
                     </table>
                 }
 

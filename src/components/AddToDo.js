@@ -26,9 +26,10 @@ class AddToDo extends Component {
             description: event.target.value
         })
     }
-    addNewToDo() {
+    addNewToDo(e) {
         this.pushToDo(this.state);
         this.resetValues();
+        e.preventDefault();
     }
     resetValues() {
         this.setState(this.baseState);
